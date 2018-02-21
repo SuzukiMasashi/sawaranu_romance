@@ -59,6 +59,36 @@ class RomanNumeralTest < ActiveSupport::TestCase
     assert { roman_numeral.to_s == 'ⅯⅯⅯⅭⅯⅩⅭⅠⅩ' }
   end
 
+  test '#to_s, 111' do
+    roman_numeral = RomanNumeral.new(numeral: 111)
+
+    assert { roman_numeral.to_s == 'ⅭⅩⅠ' }
+  end
+
+  test '#to_s, 555' do
+    roman_numeral = RomanNumeral.new(numeral: 555)
+
+    assert { roman_numeral.to_s == 'ⅮⅬⅤ' }
+  end
+
+  test '#to_s, 666' do
+    roman_numeral = RomanNumeral.new(numeral: 666)
+
+    assert { roman_numeral.to_s == 'ⅮⅭⅬⅩⅤⅠ' }
+  end
+
+  test '#to_s, 777' do
+    roman_numeral = RomanNumeral.new(numeral: 777)
+
+    assert { roman_numeral.to_s == 'ⅮⅭⅭⅬⅩⅩⅤⅠⅠ' }
+  end
+
+  test '#to_s, 888' do
+    roman_numeral = RomanNumeral.new(numeral: 888)
+
+    assert { roman_numeral.to_s == 'ⅮⅭⅭⅭⅬⅩⅩⅩⅤⅠⅠⅠ' }
+  end
+
   test '#to_s, 0' do
     roman_numeral = RomanNumeral.new(numeral: 0)
 
