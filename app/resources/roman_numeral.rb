@@ -5,6 +5,8 @@ module Types
 end
 
 class RomanNumeral < Dry::Struct
+  include Comparable
+
   class RangeError < StandardError ; end
 
   attribute :numeral, Types::Coercible::Int
@@ -29,6 +31,16 @@ class RomanNumeral < Dry::Struct
 
   def *(other)
     new(numeral: numeral * other.numeral)
+  end
+
+  # Object#==を再定義
+  def ==(other)
+    numeral == other.numeral
+  end
+
+  # Comparableモジュールをincludeして<=>を再定義すると<,<=,>=,>が定義される
+  def <=>(other)
+    numeral <=> other.numeral
   end
 
   private

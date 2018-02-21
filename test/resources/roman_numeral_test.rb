@@ -215,4 +215,53 @@ class RomanNumeralTest < ActiveSupport::TestCase
     end
     assert { e.message == 'numeral must be one of: 1 - 3999' }
   end
+
+  test '#==, 12 == 12' do
+    roman_numeral1 = RomanNumeral.new(numeral: 12)
+    roman_numeral2 = RomanNumeral.new(numeral: 12)
+
+    assert { roman_numeral1 == roman_numeral2 }
+  end
+
+  test '#<, 1 < 3999' do
+    roman_numeral1 = RomanNumeral.new(numeral: 1)
+    roman_numeral2 = RomanNumeral.new(numeral: 3999)
+
+    assert { roman_numeral1 < roman_numeral2 }
+  end
+
+  test '#<=, 1 <= 3999' do
+    roman_numeral1 = RomanNumeral.new(numeral: 1)
+    roman_numeral2 = RomanNumeral.new(numeral: 3999)
+
+    assert { roman_numeral1 <= roman_numeral2 }
+  end
+
+  test '#<=, 12 <= 12' do
+    roman_numeral1 = RomanNumeral.new(numeral: 12)
+    roman_numeral2 = RomanNumeral.new(numeral: 12)
+
+    assert { roman_numeral1 <= roman_numeral2 }
+  end
+
+  test '#<, 3999 > 1' do
+    roman_numeral1 = RomanNumeral.new(numeral: 3999)
+    roman_numeral2 = RomanNumeral.new(numeral: 1)
+
+    assert { roman_numeral1 > roman_numeral2 }
+  end
+
+  test '#<=, 1 >= 3999' do
+    roman_numeral1 = RomanNumeral.new(numeral: 3999)
+    roman_numeral2 = RomanNumeral.new(numeral: 1)
+
+    assert { roman_numeral1 >= roman_numeral2 }
+  end
+
+  test '#<=, 12 >= 12' do
+    roman_numeral1 = RomanNumeral.new(numeral: 12)
+    roman_numeral2 = RomanNumeral.new(numeral: 12)
+
+    assert { roman_numeral1 >= roman_numeral2 }
+  end
 end
