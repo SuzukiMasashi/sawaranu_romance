@@ -5,7 +5,8 @@ module Types
 end
 
 class RomanNumeral < Dry::Struct
-  class RomanNumeralRangeError < StandardError ; end
+  class RangeError < StandardError ; end
+  class TypeError < StandardError ; end
 
   attribute :numeral, Types::Coercible::Int
 
@@ -43,7 +44,7 @@ class RomanNumeral < Dry::Struct
   }
 
   def to_s
-    return 'error' unless numeral.between?(1, 3999)
+    raise RangeError, 'numeral must be one of: 1 - 3999' unless numeral.between?(1, 3999)
 
     roman_str = ''
     balance   = numeral
@@ -60,7 +61,7 @@ class RomanNumeral < Dry::Struct
   end
 
   def +(other)
-    return 'error' unless other.is_a?(RomanNumeral)
+    raise TypeError, 'argument must be RomanNumeral' unless other.is_a?(RomanNumeral)
 
     RomanNumeral.new(numeral: numeral + other.numeral).to_s
   end

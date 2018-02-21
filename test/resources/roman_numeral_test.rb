@@ -119,9 +119,33 @@ class RomanNumeralTest < ActiveSupport::TestCase
     assert { "#{roman_numeral}" == 'XXIV' }
   end
 
+  test '#to_s, 0' do
+    roman_numeral = RomanNumeral.new(numeral: 0)
+    e = assert_raises RomanNumeral::RangeError do
+      roman_numeral.to_s
+    end
+    assert { e.message == 'numeral must be one of: 1 - 3999' }
+  end
+
+  test '#to_s, 4000' do
+    roman_numeral = RomanNumeral.new(numeral: 4000)
+    e = assert_raises RomanNumeral::RangeError do
+      roman_numeral.to_s
+    end
+    assert { e.message == 'numeral must be one of: 1 - 3999' }
+  end
+
   test '#+' do
     roman_numeral1 = RomanNumeral.new(numeral: 12)
     roman_numeral2 = RomanNumeral.new(numeral: 12)
     assert { "#{roman_numeral1 + roman_numeral2}" == 'XXIV' }
+  end
+
+  test '#to_s, type error' do
+    roman_numeral1 = RomanNumeral.new(numeral: 12)
+    e = assert_raises RomanNumeral::TypeError do
+      roman_numeral1 + 'dummy'
+    end
+    assert { e.message == 'argument must be RomanNumeral' }
   end
 end
