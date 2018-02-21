@@ -34,6 +34,8 @@ class ToRomanService
 
     if [4, 9].include?(num)
       "#{ROMAN_DICTIONARY[base]}#{ROMAN_DICTIONARY[base * (num + 1)]}"
+    elsif num >= 5
+      "#{ROMAN_DICTIONARY[base * 5]}#{ROMAN_DICTIONARY[base] * num.modulo(5)}"
     else
       ROMAN_DICTIONARY[base] * num
     end
